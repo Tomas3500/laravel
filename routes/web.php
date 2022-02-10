@@ -28,25 +28,50 @@ Route::get('/test', function () {
 });
 
 // юзер контроллер
-Route::get('/my{id}', [UserController::class, 'index',])->name('users.index_my');
+Route::get('/my', [UserController::class, 'index',])->name('users.index');
 //-----работодатель контроллер
-Route::get('/employers{id}', [EmployerController::class, 'index', 'show'])->name('employers.index_employer');
 
+Route::group([
+    'as' => 'employers.',
+    'prefix' => 'employers'
+], function () {
+    Route::get('/{id}', [EmployerController::class, 'show'])->name('show');
+    Route::get('/', [EmployerController::class, 'index', 'show'])->name('index');
 //создание вакансии
-Route::get('/employers{id}/creat', [EmployerController::class, 'creat', 'show'])->name('employers.creat_employer');
+    Route::get('/creat', [EmployerController::class, 'creat'])->name('creat');
+    Route::post('/', [EmployerController::class, 'store'])->name('store');
 //редактировать вакансию
-Route::get('/employers/{empoloyer}/edit', [EmployerController::class, 'edit', 'show'])->name('employers.edit_employer');
+    Route::get('/{id}/edit', [EmployerController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [EmployerController::class, 'update'])->name('update');
+});
+
+
+Route::resource('summary', SummaryController::class);
+//почитать!
 
 //резюме контроллер
-Route::get('/summary/{id}', [SummaryController::class, 'index', 'show'])->name('summarys.index_summary');
+
+
+Route::group([
+    'as' => 'summary.', // name rout
+    'prefix' => 'summary' // url
+], function () {
+    Route::get('/{id}', [SummaryController::class, 'show'])->name('show');
+    Route::get('/', [SummaryController::class, 'index'])->name('index');
 //создать резюме
-Route::get('/summary/{id}/creat', [SummaryController::class, 'creat', 'show'])->name('summarys.creat_summary');
+    Route::get('/creat', [SummaryController::class, 'creat'])->name('creat');
+    Route::post('/', [SummaryController::class, 'store'])->name('store');
 //редактирование резюме
-Route::get('/summarys/{summary}/edit', [SummaryController::class, 'edit', 'show'])->name('summarys.edit_summary');
+    Route::get('/{id}/edit', [SummaryController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [SummaryController::class, 'update'])->name('update');
+});
 
 
 
+//lesson-2-model-bd-group
+//миграция БД, связи бд.
 
 
+//
 
 
