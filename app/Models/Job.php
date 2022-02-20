@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
 {
+
     use HasFactory;
+
+    protected $fillable = [];
+
+    public function job()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
