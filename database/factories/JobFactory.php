@@ -15,6 +15,8 @@ class JobFactory extends Factory
     public function definition()
     {
         return [
+
+            //
             'user_id' => 2,
             'position' => $this->faker->text(10),
             'description' => $this->faker->text(100),
