@@ -21,6 +21,7 @@ class CreateJobsTable extends Migration
             $table->text('description');
             $table->string('city');
             $table->string('phone');
+            $table->string('price');
             $table->timestamps();
         });
     }

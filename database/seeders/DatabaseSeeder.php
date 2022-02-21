@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Job;
+use App\Models\Role;
 use App\Models\User;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
@@ -18,7 +19,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
+
+
+        Role::factory(1)->create();
+        User::factory(1)->create();
+        Role::factory()->create();
+
+
+
+
+
+
         // dd($user);
     }
     // \App\Models\User::factory(10)->create();

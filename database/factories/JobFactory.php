@@ -15,14 +15,13 @@ class JobFactory extends Factory
     public function definition()
     {
         return [
-
-            //
-            'user_id' => 2,
+            'user_id' => User::all()->random()->id,
             'position' => $this->faker->text(10),
             'description' => $this->faker->text(100),
             'city' => $this->faker->text(10),
             'phone' => $this->faker->numerify('#########'),
-            'price' => random_int(0, 10)
+
+
             //
         ];
     }

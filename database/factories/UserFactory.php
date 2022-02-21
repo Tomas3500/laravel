@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Job;
 use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -16,7 +17,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'role_id' => 1,
+            'role_id' => Role::all()->random()->id,
             'last_name' => $this->faker->name(),
             'first_name' => $this->faker->name(),
             'phone' => random_int(0, 10),
