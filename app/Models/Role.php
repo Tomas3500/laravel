@@ -9,11 +9,16 @@ class Role extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    //const !!!! role
 
-    public function role()
+
+
+    protected $fillable = [];
+    protected $table = 'roles';
+
+    public function users()
     {
 
-        return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
     }
 }

@@ -214,8 +214,6 @@
                                     </div>
                                 </div>
                             @endforeach
-
-
                         </div>
                     </section>
                     <!-- Featured_job_end -->

@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="header-area header-transparrent">
-        <div class="headder-top header-sticky">
+        <div class="headder-top">
             <div class="container">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-lg-9 col-md-9">
@@ -16,23 +16,44 @@
                                     <h2 class="text-center mt-4">Регистрация</h2>
                                     <div class="form-group">
                                         <label for="first-name">Имя</label>
-                                        <input type="text" class="form-control" id="first-name" placeholder="Имя">
+                                        <input type="text" class="form-control" id="first-name" placeholder="Имя"
+                                            name="name">
                                     </div>
                                     <div class="form-group">
                                         <label for="last-name">Фамилия</label>
-                                        <input type="text" class="form-control" id="last-name" placeholder="Фамилия">
+                                        <input type="text" class="form-control" id="last-name" placeholder="Фамилия"
+                                            name="last_name">
                                     </div>
                                     <div class="form-group">
-                                        <label for="email-adress">Email adress</label>
-                                        <input type="email" class="form-control" id="email-adress" placeholder="Email">
+                                        <label for="email-adress">Email</label>
+                                        <input type="email" class="form-control" id="email-adress" placeholder="Email"
+                                            name="email">
                                     </div>
                                     <div class="form-group">
                                         <label for="phone-number">Номер телефона</label>
-                                        <input type="text" class="form-control" id="phone-number" placeholder="Телефон">
+                                        <input type="text" class="form-control" id="phone-number" placeholder="Телефон"
+                                            name="phone">
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Пароль</label>
-                                        <input type="password" class="form-control" id="password" placeholder="Пароль">
+                                        <input type="password" class="form-control" id="password" placeholder="Пароль"
+                                            name="password">
+                                    </div>
+                                    <div class="row justify-content-center align-items-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault1"
+                                                name="radio" value="15">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Соискатель
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault2"
+                                                checked value="16">
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                Работодатель
+                                            </label>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
                                 </form>

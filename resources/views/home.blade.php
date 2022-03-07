@@ -19,23 +19,25 @@
                     <div class="row">
                         <div class="col-xl-8">
                             <!-- form -->
-                            <form action="#" class="search-box">
+                            <form action={{ route('job.search') }} method="GET" class="search-box">
                                 <div class="input-form">
-                                    <input type="text" placeholder="Job Tittle or keyword">
+                                    <input type="text" placeholder="Поиск работы по городам" name="search_jobs"
+                                        value="{{ request()->search_jobs }}">
+                                    @error('search_jobs')
+                                        <span class="badge badge-pill badge-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
-                                <div class="select-form">
+                                {{-- <div class="select-form">
                                     <div class="select-itms">
                                         <select name="select" id="select1">
-                                            <option value="">Location BD</option>
-                                            <option value="">Location PK</option>
-                                            <option value="">Location US</option>
-                                            <option value="">Location UK</option>
+                                            <option value="1">Киев</option>
+                                            <option value="2">Харьков</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="search-form">
-                                    <a href="#">Find job</a>
-                                </div>
+                                </div> --}}
+                                <button class="btn btn-primary" type="submit">Поиск</button>
                             </form>
                         </div>
                     </div>
@@ -43,6 +45,8 @@
             </div>
         </div>
     </div>
+
+
     <!-- slider Area End-->
     <!-- Our Services Start -->
     <div class="our-services section-pad-t30">

@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class RoleFactory extends Factory
 {
@@ -15,9 +15,7 @@ class RoleFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'name' => $this->faker->name('candidate'),
-            //
-        ];
+
+        return [];
     }
 }

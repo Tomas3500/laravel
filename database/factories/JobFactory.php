@@ -19,6 +19,7 @@ class JobFactory extends Factory
             'position' => $this->faker->text(10),
             'description' => $this->faker->text(100),
             'city' => $this->faker->text(10),
+            'price' => 100,
             'phone' => $this->faker->numerify('#########'),
 
 

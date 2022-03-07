@@ -5,6 +5,7 @@ use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,17 +19,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('layout/app');
-// });
-//example lesson-1
-Route::get('/', function () {
-    return view('home');
-});
 
 
-Route::get('/user', [UserController::class, 'index',])->name('users.index');
-Route::get('/home', [UserController::class, 'home',])->name('home.index');
+
+// Route::get('/user', [UserController::class, 'index',])->name('users.index');
+Route::get('/', [UserController::class, 'home',])->name('index');
+// Route::get('/candidate', [UserController::class, 'role',])->name('role');
 // юзер контроллер
 
 //-----работодатель контроллер
@@ -48,23 +44,24 @@ Route::get('/home', [UserController::class, 'home',])->name('home.index');
 // });
 
 
-Route::resource('summary', SummaryController::class);
+// Route::resource('summary', SummaryController::class);
 //почитать!
 
 //резюме контроллер
 
 Route::group([
     'as' => 'summary.', // name rout
-    'prefix' => 'summary' // url
+    'prefix' => 'summary', // url
 ], function () {
-    Route::get('/{id}', [SummaryController::class, 'show'])->name('show');
     Route::get('/', [SummaryController::class, 'index'])->name('index');
     //создать резюме
-    Route::get('/creat', [SummaryController::class, 'create'])->name('create');
+    Route::get('/create', [SummaryController::class, 'create'])->name('create');
     Route::post('/', [SummaryController::class, 'store'])->name('store');
+    Route::get('/{id}', [SummaryController::class, 'show'])->name('show');
     //редактирование резюме
     Route::get('/{id}/edit', [SummaryController::class, 'edit'])->name('edit');
-    Route::put('/{id}', [SummaryController::class, 'update'])->name('update');
+    Route::patch('/{id}', [SummaryController::class, 'update'])->name('update');
+    Route::post('/{id}', [SummaryController::class, 'destroy'])->name('destroy');
 });
 
 
@@ -72,14 +69,23 @@ Route::group([
 
 Route::group([
     'as' => 'job.',
-    'prefix' => 'job'
+    'prefix' => 'job',
 ], function () {
     Route::get('/', [JobController::class, 'index'])->name('index');
-    Route::get('/{id}', [JobController::class, 'show'])->name('show');
+    Route::get('/all', [JobController::class, 'all'])->name('all');
+    Route::get('/search', [JobController::class, 'search'])->name('search');
     //создать вакансию
-    Route::get('/creat', [JobController::class, 'create'])->name('create');
+    Route::get('/create', [JobController::class, 'create'])->name('create');
     Route::post('/', [JobController::class, 'store'])->name('store');
+
+    Route::get('/{id}', [JobController::class, 'show'])->name('show');
+
     //редактирование вакансию
     Route::get('/{id}/edit', [JobController::class, 'edit'])->name('edit');
-    Route::put('/{id}', [JobController::class, 'update'])->name('update');
+    Route::patch('/{id}', [JobController::class, 'update'])->name('update');
+    Route::post('/{id}', [JobController::class, 'destroy'])->name('destroy');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

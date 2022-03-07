@@ -8,4 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Sammary extends Model
 {
     use HasFactory;
+
+    protected $table = 'sammaries';
+
+    protected $fillable = [
+        'user_id',
+        'first_name',
+        'last_name',
+        'position',
+        'city',
+        'experienec',
+        'education'
+    ];
+
+    public function user()
+    {
+
+        return $this->belongsTo(User::class);
+    }
 }

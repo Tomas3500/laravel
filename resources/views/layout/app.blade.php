@@ -47,7 +47,7 @@
                         <div class="col-lg-3 col-md-2">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href={{ route('home.index') }}><img src="images/logo/logo.png" alt=""></a>
+                                <a href={{ route('index') }}><img src="images/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9">
@@ -56,19 +56,54 @@
                                 <div class="main-menu">
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><a href={{ route('home.index') }}>Главная</a></li>
-                                            <li><a href={{ route('job.index') }}>Найти работу </a></li>
-                                            <li><a href="contact.html">Контакты</a></li>
+                                            <li><a href={{ route('index') }}>Главная</a></li>
+                                            <li><a href={{ route('job.all') }}>Найти работу </a></li>
+                                            @auth
+                                                <li>
+
+                                                    @if (auth()->user()->role->name == 'Соискатель')
+                                                        <a href={{ route('summary.index') }}>
+                                                            {{ auth()->user()->first_name }}
+
+                                                        </a>
+                                                    @else
+                                                        <a href={{ route('job.index') }}>
+                                                            {{ auth()->user()->first_name }}
+
+                                                        </a>
+                                                    @endif
+
+                                                </li>
+                                            @endauth
                                         </ul>
                                     </nav>
                                 </div>
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <a href={{ route('users.index') }} class="btn head-btn1">Регистрация</a>
-                                    <a href="authorization.html" class="btn head-btn2">Войти</a>
+                                    @guest
+                                        <a href={{ route('register') }} class="btn head-btn1">Регистрация</a>
+                                        <a href={{ route('login') }} class="btn head-btn2">Войти</a>
+                                    @endguest
+
+                                    @auth
+
+                                        <a class="btn head-btn2" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                                                     document.getElementById('logout-form').submit();">
+                                            Выход
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+
+                                    @endauth
                                 </div>
                             </div>
                         </div>
+
+
                         <!-- Mobile Menu -->
                         <div class="col-12">
                             <div class="mobile_menu d-block d-lg-none"></div>
@@ -83,8 +118,7 @@
     <!--main-->
     <main>
         @yield('content')
-        <!-- slider Area Start-->
-        <!-- Testimonial End -->
+
     </main>
 
     <!--footer-->
@@ -267,7 +301,6 @@
     <!-- Jquery Plugins, main Jquery -->
     <script src="/js/plugins.js"></script>
     <script src="/js/main.js"></script>
-
 </body>
 
 </html>

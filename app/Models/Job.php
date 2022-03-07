@@ -10,7 +10,18 @@ class Job extends Model
 
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'user_id',
+        'position',
+        'phone',
+        'city',
+        'description',
+        'price'
+    ];
+
+
+    protected $table = 'jobs';
+
 
     public function job()
     {
