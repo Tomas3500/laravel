@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchJobOnCityRequest;
 use App\Http\Requests\StoreJobRequest;
+use App\Models\Category;
+use App\Models\City;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Facade;
@@ -23,11 +25,20 @@ class JobController extends Controller
     public function all()
 
     {
-
+        $cities = City::all();
         $jobs = Job::all();
+        $categories = Category::all();
 
-        return view('job.list', ['jobs' => $jobs]);
+        // dd($cities);
+
+        return view('job.list', [
+            'jobs' => $jobs,
+            'categories' => $categories,
+            'cities' => $cities
+        ]);
     }
+
+
 
     public function search(SearchJobOnCityRequest $request)
 
@@ -42,8 +53,13 @@ class JobController extends Controller
 
         $jobs =  $jobsQuery->get();
 
-        return view('job.list', ['jobs' => $jobs]);
+        return view('job.list', [
+            'jobs' => $jobs
+
+        ]);
     }
+
+
 
 
     //show
@@ -57,8 +73,15 @@ class JobController extends Controller
 
     //creatre
     public function create()
+
     {
-        return view('job.create');
+        $categories = Category::all();
+        $cities = City::all();
+
+        return view('job.create', [
+            'categories' => $categories,
+            'cities' => $cities
+        ]);
     }
 
 
@@ -66,8 +89,6 @@ class JobController extends Controller
     public function store(StoreJobRequest $request)
 
     {
-
-        // $data = $request->validate();
         $data = $request->except('_token');
         Job::create($data);
         return redirect()->route('job.index');
