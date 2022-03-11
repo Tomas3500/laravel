@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\UserController;
@@ -64,7 +65,6 @@ Route::group([
     Route::post('/{id}', [SummaryController::class, 'destroy'])->name('destroy');
 });
 
-
 // rout Job
 
 Route::group([
@@ -84,6 +84,13 @@ Route::group([
     Route::get('/{id}/edit', [JobController::class, 'edit'])->name('edit');
     Route::patch('/{id}', [JobController::class, 'update'])->name('update');
     Route::post('/{id}', [JobController::class, 'destroy'])->name('destroy');
+});
+
+Route::group([
+    'as' => 'filter.',
+    'prefix' => 'filter'
+], function () {
+    Route::get('/filter', [FilterController::class, 'index'])->name('index');
 });
 
 Auth::routes();

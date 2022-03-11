@@ -17,11 +17,15 @@ class CreateJobsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('city_id');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->string('position');
             $table->text('description');
             $table->string('city');
             $table->string('phone');
-            $table->string('price');
+            $table->float('price');
             $table->timestamps();
         });
     }

@@ -11,7 +11,8 @@ class Role extends Model
 
     //const !!!! role
 
-
+    const ID_ROLE_EMPLOYER = 'employer';
+    const ID_ROLE_APPLICANT = 'applicant';
 
     protected $fillable = [];
     protected $table = 'roles';

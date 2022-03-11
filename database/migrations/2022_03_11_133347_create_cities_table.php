@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeColumnEducationToTableSammaries extends Migration
+class CreateCitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class ChangeColumnEducationToTableSammaries extends Migration
      */
     public function up()
     {
-        Schema::table('sammaries', function (Blueprint $table) {
-            //
-
-            $table->text('education')->change();
+        Schema::create('cities', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -27,10 +27,6 @@ class ChangeColumnEducationToTableSammaries extends Migration
      */
     public function down()
     {
-        Schema::table('sammaries', function (Blueprint $table) {
-            //
-
-            $table->string('education')->change();
-        });
+        Schema::dropIfExists('cities');
     }
 }

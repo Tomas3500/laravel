@@ -22,20 +22,25 @@ class DatabaseSeeder extends Seeder
     {
 
 
-        // Role::factory(2)->create();
         DB::table('roles')->insert([
             ['name' => 'Соискатель'],
             ['name' => 'Работодатель'],
         ]);
-        User::factory(1)->create();
-        Job::factory(1)->create();
 
+        DB::table('categories')->insert([
+            ['title' => 'ИТ, компьютеры,интернет'],
+            ['title' => 'Бухгалтерия, аудит'],
+            ['title' => 'Автобизнес']
+        ]);
 
+        DB::table('cities')->insert([
+            ['name' => 'Краматорск'],
+            ['name' => 'Киев'],
+            ['name' => 'Харьков']
+        ]);
+        // User::factory(1)->create();
+        // Job::factory(1)->create();
 
-
-
-
-        // dd($user);
     }
     // \App\Models\User::factory(10)->create();
 

@@ -22,7 +22,7 @@ class CreateSammariesTable extends Migration
             $table->string('position');
             $table->string('city');
             $table->string('experienec');
-            $table->string('education');
+            $table->text('education');
             $table->timestamps();
         });
     }

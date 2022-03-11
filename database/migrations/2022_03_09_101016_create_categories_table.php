@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeColumnUserIdToTableSammaries extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class ChangeColumnUserIdToTableSammaries extends Migration
      */
     public function up()
     {
-        Schema::table('sammaries', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('user_id')->change();
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +27,6 @@ class ChangeColumnUserIdToTableSammaries extends Migration
      */
     public function down()
     {
-        Schema::table('sammaries', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('user_id')->nullable()->change();
-        });
+        Schema::dropIfExists('categories');
     }
 }

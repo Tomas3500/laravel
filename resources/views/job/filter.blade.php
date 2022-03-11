@@ -137,7 +137,6 @@
                             </div>
                             <!-- Count of Job list End -->
                             <!-- single-job-content -->
-
                             @foreach ($jobs as $job)
                                 <div class="single-job-items mb-30">
                                     <div class="job-items">
