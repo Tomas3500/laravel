@@ -120,7 +120,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="count-job mb-35">
-                                        <span> Jobs found</span>
+                                        <span> Jobs found: {{ $jobs->count() }}</span>
                                         <!-- Select job items start -->
                                         <div class="select-job-items">
                                             <span>Sort by</span>
@@ -145,7 +145,7 @@
                                             <a href="#"><img src="assets/img/icon/job-list1.png" alt=""></a>
                                         </div>
                                         <div class="job-tittle job-tittle2">
-                                            <a href="#">
+                                            <a href={{ route('job.show', $job->id) }}>
                                                 <h4>{{ $job->position }}</h4>
                                             </a>
                                             <ul>
@@ -154,10 +154,6 @@
                                                 <li>{{ $job->price }}</li>
                                             </ul>
                                         </div>
-                                    </div>
-                                    <div class="items-link items-link2 f-right">
-                                        <a href="job_details.html">Full Time</a>
-                                        <span>7 hours ago</span>
                                     </div>
                                 </div>
                             @endforeach

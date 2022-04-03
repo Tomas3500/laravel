@@ -1,4 +1,4 @@
-@extends('layout.app');
+@extends('layout.app')
 @section('title-content')
     Детали вакансии
 @endsection
@@ -34,16 +34,27 @@
                             </div>
 
                         </div>
-                        <div class="d-none f-right d-lg-block">
-                            <a href={{ route('job.index') }} class="btn head-btn1">Назад</a>
-                            <a href={{ route('job.edit', $job->id) }} class="btn head-btn1">Редактировать</a>
-                        </div>
-                        <div class="d-none f-center d-lg-block">
-                            <form action={{ route('job.destroy', $job->id) }} method="POST">
-                                @csrf
-                                {{-- @method('DELETE') --}}
-                                <button type="submit" class="btn btn-danger">Удалить</button>
-                            </form>
+                        <div class="d-none d-lg-block">
+
+
+                            @guest
+
+                                <a href={{ route('index') }} class="btn head-btn1">Назад</a>
+
+                            @endguest
+
+
+
+                            @auth
+                                <a href={{ route('job.edit', $job->id) }} class="btn head-btn1">Редактировать</a>
+                                <div class="d-none f-center d-lg-block">
+                                    <form action={{ route('job.destroy', $job->id) }} method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Удалить</button>
+                                    </form>
+                                </div>
+                            @endauth
                         </div>
                     </div>
                 </div>
