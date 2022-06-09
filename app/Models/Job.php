@@ -16,7 +16,7 @@ class Job extends Model
         'city_id',
         'position',
         'phone',
-        'city',
+        // 'city',
         'description',
         'price'
     ];

@@ -9,7 +9,6 @@ class Role extends Model
 {
     use HasFactory;
 
-    //const !!!! role
 
     const ID_ROLE_EMPLOYER = 'employer';
     const ID_ROLE_APPLICANT = 'applicant';

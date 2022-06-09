@@ -23,7 +23,6 @@ class CreateJobsTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->string('position');
             $table->text('description');
-            $table->string('city');
             $table->string('phone');
             $table->float('price');
             $table->timestamps();

@@ -22,11 +22,14 @@ class FilterController extends Controller
         $querys = $request->except('_token');
 
         if (isset($request)) {
-            $querys = Job::where('city_id', '=', $request->name)
+            $querys = Job::where('city_id', '=', $request->city_id)
                 ->orWhere('category_id', '=', $request->category_id);
         };
 
+        dd($request);
         $jobs = $querys->get();
+
+
 
         return view('job.filter', [
             'jobs' => $jobs,

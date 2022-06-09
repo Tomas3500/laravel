@@ -26,10 +26,10 @@ class StoreJobRequest extends FormRequest
         return [
             'user_id' => 'required|integer|exists:users,id',
             'city_id' => 'required|integer|exists:cities,id',
-            'category_id' => 'required|integer|exists:categories,id',
+            // 'category_id' => 'required|integer|exists:categories,id',
             'position' => 'required|string|min:3|max:50',
             'description' => 'nullable|string|min:3|max:255',
-            'city' => 'nullable|string|min:3|max:50',
+            // 'city' => 'nullable|string|min:3|max:50',
             'phone' => 'required|string|max:11',
             'price' => 'required|string|max:11'
 

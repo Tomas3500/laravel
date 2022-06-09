@@ -27,15 +27,28 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description">Описание вакансии</label>
-                            <input type="text" class="form-control" id="description" placeholder="description"
-                                name="description" value="{{ $job->description }}">
+                            <label for="city">Город</label>
+                            <select class="form-select" id="city" aria-label="Default select example" name="city_id">
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="city">Город</label>
-                            <input type="text" class="form-control" id="city" placeholder="Город" name="city"
-                                value="{{ $job->city }}">
+                            <label for="category">Категория</label>
+                            <select class="form-select" id="category" aria-label="Default select example"
+                                name="category_id">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Описание вакансии</label>
+                            <input type="text" class="form-control" id="description" placeholder="description"
+                                name="description" value="{{ $job->description }}">
                         </div>
 
                         <div class="form-group">

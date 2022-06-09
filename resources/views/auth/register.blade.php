@@ -14,6 +14,9 @@
                                 <!--form-regist-->
                                 <form action="{{ route('register') }}" method="POST">
                                     @csrf
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
                                     <h2 class="text-center mt-4">Регистрация</h2>
                                     <div class="form-group">
                                         <label for="first-name">Имя</label>

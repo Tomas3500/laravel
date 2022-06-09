@@ -54,29 +54,6 @@
                                     </select>
                                 </div>
                                 <!--  Select job items End-->
-                                <!-- select-Categories start -->
-                                <div class="select-Categories pt-80 pb-50">
-                                    <div class="small-section-tittle2">
-                                        <h4>Опыт работы</h4>
-                                    </div>
-                                    <label class="container">1-2 Years
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">2-3 Years
-                                        <input type="checkbox" checked="checked active">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">3-6 Years
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">6-more..
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <!-- select-Categories End -->
                             </div>
                             <div class="single-listing">
                                 <!-- Range Slider Start -->
@@ -93,7 +70,8 @@
                                                     <p>Price :</p>
                                                 </div>
                                                 <div class="price_value d-flex justify-content-center">
-                                                    <input type="text" class="js-input-from" id="amount" readonly />
+                                                    <input type="text" class="js-input-from" id="amount" name="min"
+                                                        readonly />
                                                     <span>to</span>
                                                     <input type="text" class="js-input-to" id="amount" readonly />
                                                 </div>
@@ -120,16 +98,11 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="count-job mb-35">
-                                        <span> Jobs found</span>
+                                        <span> Jobs found {{ $jobs->count() }}</span>
                                         <!-- Select job items start -->
                                         <div class="select-job-items">
                                             <span>Sort by</span>
-                                            <select name="select">
-                                                <option value="">None</option>
-                                                <option value="">job list</option>
-                                                <option value="">job list</option>
-                                                <option value="">job list</option>
-                                            </select>
+                                            <a href="/job/all?sort[created_at]=desc" class="text-black-50">По дате</a>
                                         </div>
                                         <!--  Select job items End-->
                                     </div>
@@ -144,19 +117,15 @@
                                             <a href="#"><img src="assets/img/icon/job-list1.png" alt=""></a>
                                         </div>
                                         <div class="job-tittle job-tittle2">
-                                            <a href="#">
+                                            <a href="{{ route('job.show', $job->id) }}">
                                                 <h4>{{ $job->position }}</h4>
                                             </a>
                                             <ul>
-                                                <li>Creative Agency</li>
-                                                <li><i class="fas fa-map-marker-alt"></i>{{ $job->city }}</li>
-                                                <li>{{ $job->price }}</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>Город: {{ $job->city->name }}
+                                                </li>
+                                                <li>Зарплата: {{ $job->price }}</li>
                                             </ul>
                                         </div>
-                                    </div>
-                                    <div class="items-link items-link2 f-right">
-                                        <a href="job_details.html">Full Time</a>
-                                        <span>7 hours ago</span>
                                     </div>
                                 </div>
                             @endforeach

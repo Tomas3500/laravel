@@ -21,8 +21,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <form action="{{ route('filter.index') }}" method="GET">
                         @csrf
                         <button class="btn btn-primary" type="submit">Фильтр</button>
@@ -54,28 +52,6 @@
                                     </select>
                                 </div>
                                 <!--  Select job items End-->
-                                <!-- select-Categories start -->
-                                <div class="select-Categories pt-80 pb-50">
-                                    <div class="small-section-tittle2">
-                                        <h4>Опыт работы</h4>
-                                    </div>
-                                    <label class="container">1-2 Years
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">2-3 Years
-                                        <input type="checkbox" checked="checked active">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">3-6 Years
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">6-more..
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
                                 <!-- select-Categories End -->
                             </div>
                             <div class="single-listing">
@@ -123,20 +99,14 @@
                                         <span> Jobs found: {{ $jobs->count() }}</span>
                                         <!-- Select job items start -->
                                         <div class="select-job-items">
-                                            <span>Sort by</span>
-                                            <select name="select">
-                                                <option value="">None</option>
-                                                <option value="">job list</option>
-                                                <option value="">job list</option>
-                                                <option value="">job list</option>
-                                            </select>
+                                            <span>Сортировка</span>
+                                            <a href="/job/all?sort[created_at]=desc" class="text-black-50">По дате</a>
                                         </div>
                                         <!--  Select job items End-->
                                     </div>
                                 </div>
                             </div>
                             <!-- Count of Job list End -->
-                            <!-- single-job-content -->
 
                             @foreach ($jobs as $job)
                                 <div class="single-job-items mb-30">
@@ -149,9 +119,10 @@
                                                 <h4>{{ $job->position }}</h4>
                                             </a>
                                             <ul>
-                                                <li>Creative Agency</li>
-                                                <li><i class="fas fa-map-marker-alt"></i>{{ $job->city }}</li>
-                                                <li>{{ $job->price }}</li>
+                                                <li>Дата <br> добавления: {{ $job->created_at->format('d-m-Y') }}</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>Город: {{ $job->city->name }}
+                                                </li>
+                                                <li>Зарплата: {{ $job->price }}</li>
                                             </ul>
                                         </div>
                                     </div>

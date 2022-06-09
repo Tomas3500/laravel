@@ -49,7 +49,7 @@ Route::group([
 ], function () {
     Route::get('/', [JobController::class, 'index'])->name('index');
     Route::get('/all', [JobController::class, 'all'])->name('all');
-    Route::get('/search', [JobController::class, 'search'])->name('search');
+    Route::get('/{id}', [JobController::class, 'search'])->name('search');
     //создать вакансию
     Route::get('/create', [JobController::class, 'create'])->name('create');
     Route::post('/', [JobController::class, 'store'])->name('store');

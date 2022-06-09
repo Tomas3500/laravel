@@ -22,14 +22,21 @@ class JobController extends Controller
         return view('job.index', ['jobs' => $jobs]);
     }
 
-    public function all()
+    public function all(Request $request)
 
     {
+
+        $sorts = $request->query('sort') ?? [];
+        $jobsQuery = Job::query();
+
+        foreach ($sorts as $field => $direction) {
+            $jobsQuery->orderBy($field, $direction);
+        }
+
+        $jobs = $jobsQuery->get();
         $cities = City::all();
-        $jobs = Job::all();
         $categories = Category::all();
 
-        // dd($cities);
 
         return view('job.list', [
             'jobs' => $jobs,
@@ -39,23 +46,29 @@ class JobController extends Controller
     }
 
 
+    //!!!dublicate code
 
     public function search(SearchJobOnCityRequest $request)
 
     {
-        $jobsQuery = Job::query();
+
+        $categories = Category::all();
+        $cities = City::all();
 
         if ($request->filled('search_jobs')) {
-
-            $jobsQuery->where('city', '=', $request->search_jobs);
+            $jobsQuery = Job::whereHas('city', function ($queryCity) use ($request) {
+                $queryCity->where('name', 'like', "%$request->search_jobs%");
+            });
         }
-
 
         $jobs =  $jobsQuery->get();
 
-        return view('job.list', [
-            'jobs' => $jobs
 
+
+        return view('job.list', [
+            'jobs' => $jobs,
+            'categories' => $categories,
+            'cities' => $cities
         ]);
     }
 
@@ -99,8 +112,14 @@ class JobController extends Controller
     {
 
         $job = Job::findOrfail($id);
+        $cities = City::all();
+        $categories = Category::all();
 
-        return view('job.edit', ['job' => $job]);
+        return view('job.edit', [
+            'job' => $job,
+            'cities' => $cities,
+            'categories' => $categories
+        ]);
     }
 
 
@@ -111,8 +130,10 @@ class JobController extends Controller
     {
 
         $data = $request->except('_token', '_method');
+
         $job = Job::findOrfail($id);
         $job->update($data);
+        // $job->cities()->sync($request->cities);
 
         return redirect()->route('job.show', $job->id);
     }
