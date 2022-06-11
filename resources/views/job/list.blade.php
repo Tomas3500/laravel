@@ -62,17 +62,9 @@
                                     </div>
                                     <div class="widgets_inner">
                                         <div class="range_item">
-                                            <!-- <div id="slider-range"></div> -->
-                                            <input type="text" class="js-range-slider" value="" />
                                             <div class="d-flex align-items-center">
-                                                <div class="price_text">
-                                                    <p>Price :</p>
-                                                </div>
-                                                <div class="price_value d-flex justify-content-center">
-                                                    <input type="text" class="js-input-from" id="amount" readonly />
-                                                    <span>to</span>
-                                                    <input type="text" class="js-input-to" id="amount" readonly />
-                                                </div>
+                                                <input class="form-control" type="text" placeholder="Заработная плата"
+                                                    name="price">
                                             </div>
                                         </div>
                                     </div>

@@ -25,8 +25,7 @@ class SearchJobOnCityRequest extends FormRequest
     {
         return [
 
-            'search_jobs' => 'required|string|min:3|max:50'
-            //
+            'search_jobs' => 'required|string|min:3|max:50',
         ];
     }
 

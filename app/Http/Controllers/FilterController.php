@@ -23,13 +23,11 @@ class FilterController extends Controller
 
         if (isset($request)) {
             $querys = Job::where('city_id', '=', $request->city_id)
-                ->orWhere('category_id', '=', $request->category_id);
+                ->orWhere('category_id', '=', $request->category_id)
+                ->orWhere('price', '=', $request->price);
         };
 
-        dd($request);
         $jobs = $querys->get();
-
-
 
         return view('job.filter', [
             'jobs' => $jobs,

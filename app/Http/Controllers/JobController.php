@@ -9,6 +9,7 @@ use App\Models\City;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Mail;
 
 class JobController extends Controller
 {
@@ -34,6 +35,7 @@ class JobController extends Controller
         }
 
         $jobs = $jobsQuery->get();
+
         $cities = City::all();
         $categories = Category::all();
 
@@ -104,6 +106,11 @@ class JobController extends Controller
     {
         $data = $request->except('_token');
         Job::create($data);
+
+        Mail::send('mails.mail', [], function ($message) {
+            $message->to('palmo.example@gmail.com', 'palmo');
+            $message->from('john@johndoe.com', 'John Doe');
+        });
         return redirect()->route('job.index');
     }
 
