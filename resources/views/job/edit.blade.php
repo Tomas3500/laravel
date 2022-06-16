@@ -12,7 +12,6 @@
                 </div>
                 <div class="col-lg-8">
                     <form action={{ route('job.update', $job->id) }} method="POST">
-                        {{ $errors }}
                         @csrf
                         @method('patch')
 

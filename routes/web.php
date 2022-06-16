@@ -2,10 +2,15 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\RequestPdfToHtmlController;
+use App\Http\Controllers\SendMessageJobController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\UserController;
+use App\Jobs\SendNewJobsJob;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,17 +30,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, 'index',])->name('index');
 
+Route::group([
+    'as' => 'file.',
+    'prefix' => 'file'
+], function () {
+    Route::get('/{id}', [FileController::class, 'download'])->name('download');
+    Route::post('/file', [FileController::class, 'store'])->name('store');
+});
 
 Route::group([
     'as' => 'summary.', // name rout
     'prefix' => 'summary', // url
 ], function () {
     Route::get('/', [SummaryController::class, 'index'])->name('index');
-    //создать резюме
     Route::get('/create', [SummaryController::class, 'create'])->name('create');
     Route::post('/', [SummaryController::class, 'store'])->name('store');
     Route::get('/{id}', [SummaryController::class, 'show'])->name('show');
-    //редактирование резюме
     Route::get('/{id}/edit', [SummaryController::class, 'edit'])->name('edit');
     Route::patch('/{id}', [SummaryController::class, 'update'])->name('update');
     Route::post('/{id}', [SummaryController::class, 'destroy'])->name('destroy');
@@ -49,19 +59,22 @@ Route::group([
 ], function () {
     Route::get('/', [JobController::class, 'index'])->name('index');
     Route::get('/all', [JobController::class, 'all'])->name('all');
-    Route::get('/{id}', [JobController::class, 'search'])->name('search');
-    //создать вакансию
+    Route::get('/search', [JobController::class, 'search'])->name('search');
     Route::get('/create', [JobController::class, 'create'])->name('create');
     Route::post('/', [JobController::class, 'store'])->name('store');
-
     Route::get('/{id}', [JobController::class, 'show'])->name('show');
-
-    //редактирование вакансию
     Route::get('/{id}/edit', [JobController::class, 'edit'])->name('edit');
     Route::patch('/{id}', [JobController::class, 'update'])->name('update');
     Route::post('/{id}', [JobController::class, 'destroy'])->name('destroy');
 });
 
+
+Route::group([
+    'as' => 'message.',
+    'prefix' => 'message'
+], function () {
+    Route::get('/send', [SendMessageJobController::class, 'messege'])->name('send');
+});
 
 
 Route::group([

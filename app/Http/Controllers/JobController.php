@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchJobOnCityRequest;
 use App\Http\Requests\StoreJobRequest;
+use App\Jobs\SendNewJobsJob;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Job;
@@ -26,19 +27,18 @@ class JobController extends Controller
     public function all(Request $request)
 
     {
+        $cities = City::all();
+        $categories = Category::all();
+        $jobsQuery = Job::query();
 
         $sorts = $request->query('sort') ?? [];
-        $jobsQuery = Job::query();
 
         foreach ($sorts as $field => $direction) {
             $jobsQuery->orderBy($field, $direction);
         }
 
+
         $jobs = $jobsQuery->get();
-
-        $cities = City::all();
-        $categories = Category::all();
-
 
         return view('job.list', [
             'jobs' => $jobs,
@@ -48,7 +48,7 @@ class JobController extends Controller
     }
 
 
-    //!!!dublicate code
+    //!!!dublicate code ------ !!!!!
 
     public function search(SearchJobOnCityRequest $request)
 
@@ -64,8 +64,6 @@ class JobController extends Controller
         }
 
         $jobs =  $jobsQuery->get();
-
-
 
         return view('job.list', [
             'jobs' => $jobs,
@@ -107,10 +105,13 @@ class JobController extends Controller
         $data = $request->except('_token');
         Job::create($data);
 
-        Mail::send('mails.mail', [], function ($message) {
-            $message->to('palmo.example@gmail.com', 'palmo');
-            $message->from('john@johndoe.com', 'John Doe');
-        });
+        // $userInfo = [
+        //     'email' => auth()->user()->email,
+        //     'first_name' => auth()->user()->first_name
+        // ];
+
+        // SendNewJobsJob::dispatch($newJob, $userInfo);
+
         return redirect()->route('job.index');
     }
 
@@ -140,7 +141,6 @@ class JobController extends Controller
 
         $job = Job::findOrfail($id);
         $job->update($data);
-        // $job->cities()->sync($request->cities);
 
         return redirect()->route('job.show', $job->id);
     }
@@ -150,9 +150,7 @@ class JobController extends Controller
 
     {
 
-        $job = Job::find($id)->delete();
-
-        // $job->delete();
+        Job::find($id)->delete();
 
         return redirect()->route('job.index');
     }

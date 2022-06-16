@@ -11,17 +11,32 @@
                     <h2 class="contact-title">Добро пожаловать, {{ auth()->user()->first_name }}
                         {{ auth()->user()->last_name }}</h2>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                     <p style="font-size: 25px">Мои резюме</p>
+                </div>
+                <div class="col-lg-4">
+                    {{-- <a class="text-black-50" href={{ route('file.download') }}>Просмотреть резюме</a> --}}
+                    <p>Загруженые резюме</p>
+                    @foreach ($summaries as $item)
+                        <div class="item">
+                            <a href={{ route('file.download', $item->id) }} class="summaries"
+                                style="color: black; font-size: 10px">{{ str_replace('files/', '', $item->file) }}
+                            </a>
+                            <p class="title"></p>
+                        </div>
+                    @endforeach
                 </div>
 
                 <div class="col-lg-8">
                     <div class="main-menu">
                         @foreach ($summaries as $item)
                             <div class="item">
-                                <a href={{ route('summary.show', $item->id) }} class="summaries"
-                                    style="color: black; font-size: 40px">{{ $item->id }}.
-                                    {{ $item->position }}</a>
+                                @if ($item->file === null)
+                                    <a href={{ route('summary.show', $item->id) }} class="summaries"
+                                        style="color: black; font-size: 40px">{{ $item->id }}.
+                                        {{ $item->position }}</a>
+                                @endif
+
                                 <p class="title"></p>
                             </div>
                         @endforeach

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class FilterController extends Controller
 {
-    //
+
 
     public function index(Request $request)
 

@@ -18,7 +18,8 @@ class Sammary extends Model
         'position',
         'city',
         'experienec',
-        'education'
+        'education',
+        'file'
     ];
 
     public function user()

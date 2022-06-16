@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label for="formGroupExampleInput">Имя</label>
                             <input type="text" class="form-control" id="formGroupExampleInput" placeholder="имя"
-                                name="first_name">
+                                name="first_name" value={{ auth()->user()->first_name }}>
                             @error('first_name')
                                 <span class="error" style="color: red">{{ $message }}</span>
                             @enderror
@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <label for="formGroupExampleInput2">Фамилия</label>
                             <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Фамилия"
-                                name="last_name">
+                                name="last_name" value={{ auth()->user()->last_name }}>
                             @error('last_name')
                                 <span class="error" style="color: red">{{ $message }}</span>
                             @enderror
@@ -59,6 +59,23 @@
                                                                                                                                                                              </textarea>
                         </div>
                         <button class="btn btn-primary" type="submit">Добавить резюме</button>
+                    </form>
+                    <div class="d-none f-left d-lg-block">
+                        <a href={{ route('summary.index') }} class="btn head-btn1">Назад</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <form action="{{ route('file.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="file">Загрузка вакансии</label>
+                            <input type="file" class="form-control-file" id="file" name="file">
+                        </div>
+                        @error('file')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        <button class="btn btn-primary" type="submit">Загрузить вакансию </button>
                     </form>
                 </div>
             </div>

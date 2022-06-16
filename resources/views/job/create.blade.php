@@ -46,12 +46,12 @@
                         <div class="form-group">
                             <label for="description">Описание вакансии</label>
                             <input type="text" class="form-control" id="description" placeholder="Описание"
-                                name="description">
+                                name="description" value="{{ old('description') }}">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput4">Телефон для связи</label>
                             <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Телефон"
-                                name="phone">
+                                name="phone" value="{{ old('phone') }}">
                             @error('phone')
                                 <span class="error" style="color: red">{{ $message }}</span>
                             @enderror
@@ -59,14 +59,17 @@
 
                         <div class="form-group">
                             <label for="price">Заробтная плата</label>
-                            <input type="text" class="form-control" id="price" placeholder="Заробтная плата" name="price">
+                            <input type="text" class="form-control" id="price" placeholder="Заробтная плата" name="price"
+                                value="{{ old('price') }}">
                             @error('price')
                                 <span class="error" style="color: red">{{ $message }}</span>
                             @enderror
                         </div>
                         <button class="btn btn-primary" type="submit">Добавить вакансию</button>
                     </form>
+
                 </div>
+
             </div>
         </div>
     </section>
