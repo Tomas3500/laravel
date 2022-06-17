@@ -21,13 +21,17 @@
                             <!-- form -->
                             <form action={{ route('job.search') }} method="GET" class="search-box">
                                 <div class="input-form">
-                                    <input type="text" placeholder="Поиск работы по городам" name="search_jobs"
+                                    <input type="text" placeholder="Поиск по вакансиям"
+                                        class="form-control @error('search_jobs') is-invalid @enderror" name="search_jobs"
                                         value="{{ request()->search_jobs }}">
-                                    @error('search_jobs')
-                                        <span class="badge badge-pill badge-danger">
+
+                                    <span class="alert alert-dange" style="color: red">
+                                        @error('search_jobs')
                                             {{ $message }}
-                                        </span>
-                                    @enderror
+                                        @enderror
+
+                                    </span>
+
                                 </div>
                                 <button class="btn btn-primary" type="submit">Поиск</button>
                             </form>

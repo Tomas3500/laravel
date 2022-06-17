@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label for="formGroupExampleInput3">Должность</label>
                             <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Должность"
-                                name="position" value="{{ old('position') }}">
+                                name="position" value={{ old('position') }}>
                             @error('position')
                                 <span class="error" style="color: red">{{ $message }}</span>
                             @enderror
@@ -55,8 +55,10 @@
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput6">Подробное орисание</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="education">
-                                                                                                                                                                             </textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="education"></textarea>
+                            @error('education')
+                                <span class="error" style="color: red">{{ $message }}</span>
+                            @enderror
                         </div>
                         <button class="btn btn-primary" type="submit">Добавить резюме</button>
                     </form>

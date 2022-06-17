@@ -19,6 +19,7 @@
                             <label for="category">Категория</label>
                             <select class="form-select" id="category" aria-label="Default select example"
                                 name="category_id">
+                                <option value="" selected disabled hidden>Выберти категорию</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                 @endforeach
@@ -28,6 +29,7 @@
                         <div class="form-group">
                             <label for="city">Город</label>
                             <select class="form-select" id="city" aria-label="Default select example" name="city_id">
+                                <option value="" selected disabled hidden>Выберти город</option>
                                 @foreach ($cities as $city)
                                     <option value="{{ $city->id }}">{{ $city->name }}</option>
                                 @endforeach
@@ -44,9 +46,11 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="description">Описание вакансии</label>
-                            <input type="text" class="form-control" id="description" placeholder="Описание"
-                                name="description" value="{{ old('description') }}">
+                            <label for="formGroupExampleInput6">Описание вакансии</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="description"></textarea>
+                            @error('description')
+                                <span class="error" style="color: red">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput4">Телефон для связи</label>

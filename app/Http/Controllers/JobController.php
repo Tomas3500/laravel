@@ -58,10 +58,12 @@ class JobController extends Controller
         $cities = City::all();
 
         if ($request->filled('search_jobs')) {
-            $jobsQuery = Job::whereHas('city', function ($queryCity) use ($request) {
-                $queryCity->where('name', 'like', "%$request->search_jobs%");
-            });
+            $jobsQuery = Job::where('position', 'like', "%$request->search_jobs%");
         }
+
+        // $jobsQuery = Job::whereHas('city', function ($queryCity) use ($request) {
+        //     $queryCity->where('name', 'like', "%$request->search_jobs%");
+        // });
 
         $jobs =  $jobsQuery->get();
 

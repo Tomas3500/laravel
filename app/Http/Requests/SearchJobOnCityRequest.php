@@ -25,14 +25,14 @@ class SearchJobOnCityRequest extends FormRequest
     {
         return [
 
-            'search_jobs' => 'required|string|min:3|max:50',
+            'search_jobs' => 'required|string|min:3|max:200',
         ];
     }
 
     public function messages()
     {
         return [
-            'search_jobs.required' => 'некоректно введено название города',
+            'search_jobs.required' => 'введите вакансию',
 
         ];
     }

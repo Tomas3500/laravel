@@ -25,12 +25,12 @@ class StoreSummaryRequest extends FormRequest
     {
         return [
             'user_id' => 'required|integer|exists:users,id',
-            'first_name' => 'required|string|min:3|max:20',
-            'last_name' => 'required|string|min:3|max:20',
-            'position' => 'required|string|min:3|max:200',
-            'city' => 'nullable|string|min:3|max:50',
+            'first_name' => 'required|string|min:4|max:20',
+            'last_name' => 'required|string|min:4|max:20',
+            'position' => 'required|string|min:5',
+            'city' => 'nullable|string|min:5',
             'experienec' => 'required|string|min:3|max:50',
-            'education' => 'nullable|string|min:3|max:250'
+            'education' => 'required|string|min:10|max:250'
 
         ];
     }
@@ -41,7 +41,8 @@ class StoreSummaryRequest extends FormRequest
             'first_name.required' => 'Заполните имя',
             'last_name.required' => 'Заполните фамилию',
             'position.required' => 'Заполните должность',
-            'experienec.required' => 'Заполните Ваш опыт работы'
+            'experienec.required' => 'Заполните Ваш опыт работы',
+            'education.required' => 'Заполните заполните описание'
         ];
     }
 }

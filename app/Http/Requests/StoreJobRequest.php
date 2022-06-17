@@ -26,9 +26,9 @@ class StoreJobRequest extends FormRequest
         return [
             'user_id' => 'required|integer|exists:users,id',
             'city_id' => 'required|integer|exists:cities,id',
-            'position' => 'required|string|min:3|max:50',
-            'description' => 'nullable|string|min:3|max:255',
-            'phone' => 'required|string|max:11',
+            'position' => 'required|string|min:8',
+            'description' => 'required|string|min:3|max:255',
+            'phone' => 'required|string|min:11',
             'price' => 'required|string|max:11'
 
             //
@@ -38,9 +38,10 @@ class StoreJobRequest extends FormRequest
     public function messages()
     {
         return [
-            'position.required' => 'Заполните должность',
-            'phone.required' => 'Заполните номер телефона',
+            'position.required' => 'Заполните должность полее не менне 8 символов',
+            'phone.required' => 'Заполните номер телефона полее не менне 11 символов',
             'price.required' => 'Заполните заработную плату',
+            'description.required' => 'Заполните заработную плату',
         ];
     }
 }
