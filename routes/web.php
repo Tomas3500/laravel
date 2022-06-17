@@ -2,8 +2,16 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\FilterController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\RequestPdfToHtmlController;
+use App\Http\Controllers\SendMessageJobController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\UserController;
+use App\Jobs\SendNewJobsJob;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,61 +25,65 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-//example lesson-1
-Route::get('/test', function () {
-    $arr = ['a' => 1, 'b' => 2];
-    dump($arr);
-    dd(123);
-});
 
-// юзер контроллер
-Route::get('/my', [UserController::class, 'index',])->name('users.index');
-//-----работодатель контроллер
+
+
+Route::get('/', [UserController::class, 'index',])->name('index');
 
 Route::group([
-    'as' => 'employers.',
-    'prefix' => 'employers'
+    'as' => 'file.',
+    'prefix' => 'file'
 ], function () {
-    Route::get('/{id}', [EmployerController::class, 'show'])->name('show');
-    Route::get('/', [EmployerController::class, 'index', 'show'])->name('index');
-//создание вакансии
-    Route::get('/creat', [EmployerController::class, 'creat'])->name('creat');
-    Route::post('/', [EmployerController::class, 'store'])->name('store');
-//редактировать вакансию
-    Route::get('/{id}/edit', [EmployerController::class, 'edit'])->name('edit');
-    Route::put('/{id}', [EmployerController::class, 'update'])->name('update');
+    Route::get('/{id}', [FileController::class, 'download'])->name('download');
+    Route::post('/file', [FileController::class, 'store'])->name('store');
 });
-
-
-Route::resource('summary', SummaryController::class);
-//почитать!
-
-//резюме контроллер
-
 
 Route::group([
     'as' => 'summary.', // name rout
-    'prefix' => 'summary' // url
+    'prefix' => 'summary', // url
 ], function () {
-    Route::get('/{id}', [SummaryController::class, 'show'])->name('show');
     Route::get('/', [SummaryController::class, 'index'])->name('index');
-//создать резюме
-    Route::get('/creat', [SummaryController::class, 'creat'])->name('creat');
+    Route::get('/create', [SummaryController::class, 'create'])->name('create');
     Route::post('/', [SummaryController::class, 'store'])->name('store');
-//редактирование резюме
+    Route::get('/{id}', [SummaryController::class, 'show'])->name('show');
     Route::get('/{id}/edit', [SummaryController::class, 'edit'])->name('edit');
-    Route::put('/{id}', [SummaryController::class, 'update'])->name('update');
+    Route::patch('/{id}', [SummaryController::class, 'update'])->name('update');
+    Route::post('/{id}', [SummaryController::class, 'destroy'])->name('destroy');
+});
+
+// rout Job
+
+Route::group([
+    'as' => 'job.',
+    'prefix' => 'job',
+], function () {
+    Route::get('/', [JobController::class, 'index'])->name('index');
+    Route::get('/all', [JobController::class, 'all'])->name('all');
+    Route::get('/search', [JobController::class, 'search'])->name('search');
+    Route::get('/create', [JobController::class, 'create'])->name('create');
+    Route::post('/', [JobController::class, 'store'])->name('store');
+    Route::get('/{id}', [JobController::class, 'show'])->name('show');
+    Route::get('/{id}/edit', [JobController::class, 'edit'])->name('edit');
+    Route::patch('/{id}', [JobController::class, 'update'])->name('update');
+    Route::post('/{id}', [JobController::class, 'destroy'])->name('destroy');
 });
 
 
+Route::group([
+    'as' => 'message.',
+    'prefix' => 'message'
+], function () {
+    Route::get('/send', [SendMessageJobController::class, 'messege'])->name('send');
+});
 
-//lesson-2-model-bd-group
-//миграция БД, связи бд.
 
+Route::group([
+    'as' => 'filter.',
+    'prefix' => 'filter'
+], function () {
+    Route::get('/filter', [FilterController::class, 'index'])->name('index');
+});
 
-//
+Auth::routes();
 
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
