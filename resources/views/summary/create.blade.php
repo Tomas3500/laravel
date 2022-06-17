@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label for="formGroupExampleInput3">Должность</label>
                             <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Должность"
-                                name="position">
+                                name="position" value="{{ old('position') }}">
                             @error('position')
                                 <span class="error" style="color: red">{{ $message }}</span>
                             @enderror
@@ -43,12 +43,12 @@
                         <div class="form-group">
                             <label for="formGroupExampleInput4">Город</label>
                             <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Город"
-                                name="city">
+                                name="city" value="{{ old('city') }}">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput5">Опыт работы лет</label>
                             <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Опыт работы"
-                                name="experienec">
+                                name="experienec" value="{{ old('experienec') }}">
                             @error('experienec')
                                 <span class="error" style="color: red">{{ $message }}</span>
                             @enderror
