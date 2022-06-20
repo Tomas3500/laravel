@@ -18,12 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'role_id',
         'first_name',
         'last_name',
         'phone',
         'email',
         'password',
+        'role_id',
 
     ];
 
@@ -55,6 +55,6 @@ class User extends Authenticatable
     public function sammaries()
     {
 
-        return $this->hasMany(Sammary::class, 'user_id', 'id');
+        return $this->hasMany(Sammary::class);
     }
 }

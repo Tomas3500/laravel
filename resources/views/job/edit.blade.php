@@ -18,8 +18,8 @@
                         <div class="form-group">
                             <input type="text" hidden name="user_id" value="{{ auth()->user()->id }}">
                             <label for="position">На должность</label>
-                            <input type="text" class="form-control" id="position" placeholder="должность" name="position"
-                                value="{{ $job->position }}">
+                            <input type="text" class="form-control" id="position" placeholder="должность"
+                                name="position" value="{{ $job->position }}">
                             @error('position')
                                 <span class="error" style="color: red">{{ $message }}</span>
                             @enderror
@@ -59,15 +59,28 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            <label for="price">Заробтная плата</label>
-                            <input type="text" class="form-control" id="phone" placeholder="Заробтная плата" name="price"
-                                value="{{ $job->price }}">
-                            @error('price')
-                                <span class="error" style="color: red">{{ $message }}</span>
-                            @enderror
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="price">Заробтная плата</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="Заробтная плата"
+                                        name="price" value="{{ $job->price }}">
+                                    @error('price')
+                                        <span class="error" style="color: red">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="category">Валюта</label>
+                                <select class="form-select" id="currency" aria-label="Default select example"
+                                    name="currency_id">
+                                    <option value="" selected disabled hidden>Укажите валюту</option>
+                                    @foreach ($currencies as $currency)
+                                        <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-
                         <button class="btn btn-primary" type="submit">Обновить</button>
                     </form>
                     <div class="d-none f-left d-lg-block">

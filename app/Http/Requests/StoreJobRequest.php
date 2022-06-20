@@ -26,6 +26,7 @@ class StoreJobRequest extends FormRequest
         return [
             'user_id' => 'required|integer|exists:users,id',
             'city_id' => 'required|integer|exists:cities,id',
+            'currency_id' => 'required|integer|exists:currencies,id',
             'position' => 'required|string|min:8',
             'description' => 'required|string|min:3|max:255',
             'phone' => 'required|string|min:11',

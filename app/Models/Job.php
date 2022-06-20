@@ -10,20 +10,18 @@ class Job extends Model
 
     use HasFactory;
 
+    protected $table = 'jobs';
+
     protected $fillable = [
         'user_id',
         'category_id',
         'city_id',
+        'currency_id',
         'position',
         'phone',
-        // 'city',
         'description',
         'price'
     ];
-
-
-    protected $table = 'jobs';
-
 
     public function user()
     {
@@ -40,5 +38,10 @@ class Job extends Model
     {
 
         return $this->belongsTo(City::class);
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 }

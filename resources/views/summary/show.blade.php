@@ -54,11 +54,39 @@
                             <a href={{ route('summary.index') }} class="btn head-btn1">Назад</a>
                             <a href={{ route('summary.edit', $sammary->id) }} class="btn head-btn1">Редактировать</a>
                             <div class="d-none f-center d-lg-block">
-                                <form action={{ route('summary.destroy', $sammary->id) }} method="POST">
-                                    @csrf
-                                    {{-- @method('DELETE') --}}
-                                    <button type="submit" class="btn btn-danger">Удалить</button>
-                                </form>
+                                <div class="d-none f-center d-lg-block">
+                                    <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Удалить резюме</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Хотите удалить {{ $sammary->position }} ?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Закрыть</button>
+                                                    <form action={{ route('summary.destroy', $sammary->id) }}
+                                                        method='POST'>
+                                                        @csrf
+                                                        <button type="submit"class="btn btn-primary">Удалить</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" data-target="#exampleModal" class="btn btn-danger"
+                                        data-toggle="modal">
+                                        Удалить
+                                    </button>
+                                </div>
+
                             </div>
 
                         </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreJobRequest;
 use App\Jobs\SendNewJobsJob;
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Currency;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Facade;
@@ -92,10 +93,13 @@ class JobController extends Controller
     {
         $categories = Category::all();
         $cities = City::all();
+        $currencies = Currency::all();
+        // dd($currencies);
 
         return view('job.create', [
             'categories' => $categories,
-            'cities' => $cities
+            'cities' => $cities,
+            'currencies' => $currencies
         ]);
     }
 
@@ -124,11 +128,13 @@ class JobController extends Controller
         $job = Job::findOrfail($id);
         $cities = City::all();
         $categories = Category::all();
+        $currencies = Currency::all();
 
         return view('job.edit', [
             'job' => $job,
             'cities' => $cities,
-            'categories' => $categories
+            'categories' => $categories,
+            'currencies' => $currencies
         ]);
     }
 

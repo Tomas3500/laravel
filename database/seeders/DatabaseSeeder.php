@@ -38,6 +38,14 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Киев'],
             ['name' => 'Харьков']
         ]);
+
+        DB::table('currencies')->insert([
+            ['name' => 'UA'],
+            ['name' => 'USD'],
+            ['name' => 'EUR']
+        ]);
+
+
         // User::factory(1)->create();
         // Job::factory(1)->create();
 

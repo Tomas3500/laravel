@@ -38,8 +38,8 @@
 
                         <div class="form-group">
                             <label for="position">На должность</label>
-                            <input type="text" class="form-control" id="position" placeholder="Должность" name="position"
-                                value="{{ old('position') }}">
+                            <input type="text" class="form-control" id="position" placeholder="Должность"
+                                name="position" value="{{ old('position') }}">
 
                             @error('position')
                                 <span class="error" style="color: red">{{ $message }}</span>
@@ -60,20 +60,31 @@
                                 <span class="error" style="color: red">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        <div class="form-group">
-                            <label for="price">Заробтная плата</label>
-                            <input type="text" class="form-control" id="price" placeholder="Заробтная плата" name="price"
-                                value="{{ old('price') }}">
-                            @error('price')
-                                <span class="error" style="color: red">{{ $message }}</span>
-                            @enderror
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="price">Заробтная плата</label>
+                                    <input type="text" class="form-control" id="price" placeholder="Заробтная плата"
+                                        name="price" value="{{ old('price') }}">
+                                    @error('price')
+                                        <span class="error" style="color: red">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="category">Валюта</label>
+                                <select class="form-select" id="currency" aria-label="Default select example"
+                                    name="currency_id">
+                                    <option value="" selected disabled hidden>Укажите валюту</option>
+                                    @foreach ($currencies as $currency)
+                                        <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Добавить вакансию</button>
                     </form>
-
                 </div>
-
             </div>
         </div>
     </section>

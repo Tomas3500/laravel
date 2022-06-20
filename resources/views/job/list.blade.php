@@ -114,7 +114,7 @@
                                                 <li>Дата <br> добавления: {{ $job->created_at->format('d-m-Y') }}</li>
                                                 <li><i class="fas fa-map-marker-alt"></i>Город: {{ $job->city->name }}
                                                 </li>
-                                                <li>Зарплата: {{ $job->price }}</li>
+                                                <li>Зарплата: {{ $job->price }} {{ $job->currency->name }}</li>
                                             </ul>
                                         </div>
                                     </div>

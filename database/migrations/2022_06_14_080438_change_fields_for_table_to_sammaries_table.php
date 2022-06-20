@@ -14,10 +14,6 @@ class ChangeFieldsForTableToSammariesTable extends Migration
     public function up()
     {
         Schema::table('sammaries', function (Blueprint $table) {
-            //
-            // $table->id()->nullable()->change();
-            // $table->unsignedBigInteger('user_id')->nullable()->change();
-            // $table->foreign('user_id')->references('id')->on('users')->nullable()->change();
             $table->string('first_name')->nullable()->change();
             $table->string('last_name')->nullable()->change();
             $table->string('position')->nullable()->change();
@@ -36,9 +32,6 @@ class ChangeFieldsForTableToSammariesTable extends Migration
     {
         Schema::table('sammaries', function (Blueprint $table) {
             //
-            // $table->id()->change();
-            // $table->unsignedBigInteger('user_id')->change();
-            // $table->foreign('user_id')->references('id')->on('users')->change();
             $table->string('first_name')->change();
             $table->string('last_name')->change();
             $table->string('position')->change();
